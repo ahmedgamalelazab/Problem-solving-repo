@@ -11,15 +11,12 @@ def find_second_maximum(nums):
     while fast < len(nums):
         cal_max = max(nums[slow], nums[fast])
         if cal_max > detected_max:
-            second_calc = min(detected_max, cal_max) 
+            second_max = detected_max
             detected_max = cal_max
-            second_max = max(second_calc, second_max)
         
         if cal_max > second_max and cal_max < detected_max:
             second_max = cal_max
             
-   
-        
         slow = slow + 1
         fast = fast + 1
     
