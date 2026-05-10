@@ -1,0 +1,11 @@
+
+
+# Building stack and queue from scratch using existing python list
+# And doubly linked list as well
+
+
+1. Stack implementation using built in list [✅]
+2. Stack implementation using singly linked list [x]
+2. Stack implementation using doubly linked list [x]
+2. Queue implementation using doubly linked list [x]
+3. Problem solving
