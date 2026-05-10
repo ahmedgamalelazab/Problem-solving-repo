@@ -27,6 +27,17 @@ class SinglyLinkedList:
             
             traversal_ptr.next = Node(data, None)
             return None
+    
+    def inset_at_tail_recursivly(self, head, data):
+        # base case
+        if head == None:
+            return
+        else:
+            if head.next == None: # that's mean i'm at the end
+                head.next = Node(data, None)
+                return
+            else:
+                return self.inset_at_tail_recursivly(head.next if head.next else None, data)
 
     def insert_at_head(self, data):
         traversal_ptr = self.head
@@ -34,8 +45,8 @@ class SinglyLinkedList:
             traversal_ptr = Node(data, None)
             return None
         else:
-            traversal_ptr.next = self.head.next
             self.head = Node(data, traversal_ptr)
+            traversal_ptr = None
             return None
     
     def _delete(self, prev, curr, data):
@@ -96,10 +107,10 @@ class SinglyLinkedList:
         
 if __name__ == "__main__":
     linked_list = SinglyLinkedList(10)
-    linked_list.insert_at_tail(20)
-    linked_list.insert_at_tail(30)
-    linked_list.insert_at_tail(40)
-    linked_list.insert_at_tail(50)
+    linked_list.insert_at_head(20)
+    linked_list.insert_at_head(30)
+    linked_list.insert_at_head(40)
+    linked_list.insert_at_head(50)
     linked_list.print_self()
     # linked_list.delete_at_head()
     # linked_list.print_self()
