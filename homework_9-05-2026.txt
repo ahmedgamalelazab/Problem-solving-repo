@@ -8,5 +8,6 @@
 2. Stack implementation using singly linked list [x]
 3. Stack implementation using doubly linked list [x]
 4. Queue implementation using doubly linked list [x]
-5. Introduce unit testing using pytest
-6. Problem solving
+5. Introduce unit testing using pytest [✅]
+6. Doubly linked list implementation [✅]
+7. Problem solving [infinite]
