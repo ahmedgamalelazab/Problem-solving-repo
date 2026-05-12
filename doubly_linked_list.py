@@ -89,6 +89,7 @@ class DoublyLinkedList:
                         found_node.next = None
                         found_node.prev = None
                         found_node = None
+                        found_ptr = None
                         return True     
             else:
                 return False                
