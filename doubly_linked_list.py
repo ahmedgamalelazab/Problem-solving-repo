@@ -46,13 +46,17 @@ class DoublyLinkedList:
     
     def remove_from_tail(self):
         if (self.head == self.tail) and (self.head or self.tail):
+            rd = self.head.data
             self.head = self.tail = None
+            return rd
         else:
             tail_ptr = self.tail
             self.tail = self.tail.prev
             self.tail.next = None
+            rd = tail_ptr.data
             tail_ptr.prev = None
             tail_ptr = None
+            return rd
     
     def remove(self, data):
         if self.head == self.tail and self.head == None:
