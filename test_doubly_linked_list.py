@@ -133,3 +133,21 @@ def test_remove_from_and_simulate_clean_then_try_to_remove():
     res = dll.remove(100)
     
     assert res == False
+    
+    
+def test_remove_extra_from_tail():
+    dll = DoublyLinkedList()
+    dll.insert_on_tail(1)
+    dll.insert_on_tail(2)
+    
+    for i in range(2):
+        dll.remove_from_head()
+    
+    assert dll.remove_from_head() == None
+    assert dll.remove_from_tail() == None
+    
+    dll.insert_on_tail(10)
+    dll.insert_on_tail(20)
+    
+    ri = dll.remove_from_tail()
+    assert ri == 20
