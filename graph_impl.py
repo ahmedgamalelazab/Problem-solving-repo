@@ -6,7 +6,7 @@
 """
 
 from queue import Queue
-
+from stack_impl_doubly_linked_list_based import Stack
 
 class Graph():
     def __init__(self, nodes:list[str]):
@@ -47,6 +47,29 @@ def breadth_first_search(graph: Graph, source:str) -> list[str]:
     return results
 
 
+def depth_first_search(graph: Graph, source:str) -> list[str]:
+    stack = Stack()
+    visited = {}
+    results = []
+    stack.push(source)
+    
+    while not stack.is_empty():
+        vertex = stack.pop()
+        if not vertex in visited:
+            visited[vertex] = True
+            results.append(vertex)
+            is_vertex_having_neighbours = True if graph.get_vertex_neighbours(source) and len(graph.get_vertex_neighbours(source)) > 0 else False
+            if is_vertex_having_neighbours:
+                vertex_neighbours = graph.get_vertex_neighbours(vertex)
+                for neighbour in vertex_neighbours:
+                    stack.push(neighbour) 
+            
+        else:
+            continue
+    
+    return results
+
+
 if __name__ == "__main__":
     g = Graph(["A","B","C","D","E"])
     
@@ -58,8 +81,10 @@ if __name__ == "__main__":
     
     g.print_graph()
     
-    output = breadth_first_search(g,"A")
+    bfs_output = breadth_first_search(g,"A")
+    dfs_output = depth_first_search(g,"A")
     
-    print(output)
+    print("BFS->",bfs_output)
+    print("DFS->",dfs_output)
     
     
