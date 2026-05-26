@@ -1,5 +1,5 @@
 import pytest
-from graph_impl import Graph, breadth_first_search, depth_first_search
+from graph_impl import Graph, breadth_first_search, depth_first_search, detect_cycle_in_graph
 
 
 # ─── helpers ───────────────────────────────────────────────────────────────────
@@ -404,3 +404,27 @@ class TestBFSvsDFS:
     def test_single_node_both_agree(self):
         g = Graph(["Z"])
         assert breadth_first_search(g,"Z") == depth_first_search(g,"Z") == ["Z"]
+        
+
+class TestDetectCycleInGraph:
+    def test_no_cycle_detection(self):
+        g = make_graph([("A","B"),("A","C"),("B","D"),("C","D")])
+        cycle_detected = detect_cycle_in_graph(g)
+        assert cycle_detected == False
+    
+    def test_cycle_detection_with_given_cycle_graph(self):
+        g = Graph(["A","B","C","D","E","X","Y","O"])
+        g.add_neighbour("A","B")
+        g.add_neighbour("A","C")
+        g.add_neighbour("A","D")
+        g.add_neighbour("B","E")
+        g.add_neighbour("C","E")
+        g.add_neighbour("D","E")
+        g.add_neighbour("E","X")
+        g.add_neighbour("X","Y")
+        g.add_neighbour("Y","D")
+        g.add_neighbour("D","O")
+        g.add_neighbour("O","A")
+        g.add_neighbour("A","O")
+        cycle_detected = detect_cycle_in_graph(g)
+        assert cycle_detected == True

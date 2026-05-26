@@ -11,10 +11,11 @@ from stack_impl_doubly_linked_list_based import Stack
 class Graph():
     def __init__(self, nodes:list[str]):
         self.repository = {}
+        self.verticies = nodes or []
         for node in nodes:
             self.repository[node] = []
         
-    def get_vertex_neighbours(self, source) -> list[str]:
+    def get_vertex_neighbours(self, source:str) -> list[str]:
         return self.repository[source]        
 
     def add_neighbour(self, source, destination):
@@ -70,6 +71,37 @@ def depth_first_search(graph: Graph, source:str) -> list[str]:
     return results
 
 
+def dfs_rec(g: Graph, vertex: str, visited:dict[str,bool], in_path:dict[str: bool])-> bool:
+    if vertex in in_path and in_path[vertex] == True:
+        return True
+    if vertex in visited:
+        return False
+
+    visited[vertex] = True
+    in_path[vertex] = True
+    
+    nbs = g.get_vertex_neighbours(vertex)
+    
+    for nb in nbs:
+        if dfs_rec(g, nb, visited, in_path):
+            return True
+    
+    in_path[vertex] = False # recursion is useful here in order to shutdown the path
+    return False
+
+def detect_cycle_in_graph(graph: Graph)-> bool:
+    vertices = graph.verticies
+    visitied = {}
+    in_path = {}
+    
+    for v in vertices:
+        if v not in visitied:
+            if dfs_rec(graph, v, visitied, in_path):
+                return True
+    return False
+
+
+
 if __name__ == "__main__":
     g = Graph(["A","B","C","D","E"])
     
@@ -83,8 +115,10 @@ if __name__ == "__main__":
     
     bfs_output = breadth_first_search(g,"A")
     dfs_output = depth_first_search(g,"A")
+    cycle_detected = detect_cycle_in_graph(g)
     
     print("BFS->",bfs_output)
     print("DFS->",dfs_output)
+    print("DCIG->",cycle_detected)
     
     
